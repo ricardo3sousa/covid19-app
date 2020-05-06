@@ -1,0 +1,63 @@
+chosenCountry(value){
+    this.service.getCountry(value)
+    .subscribe((data) => {
+      
+      data.reverse();
+
+      let n = data[0].Country;
+      this.name = n;
+
+      let pos = `Cases: ${data[0].Confirmed}`;
+      this.positive = pos;
+
+      let rec = `Recovered: ${data[0].Recovered}`;
+      this.recovered = rec;
+
+      let dea = `Deaths: ${data[0].Deaths}`;
+      this.deaths = dea;
+
+      let label = "Daily Update";
+      this.label = label;
+
+      let today = data[0].Confirmed;
+      let yesterday = data[1].Confirmed;
+      this.newCases = today - yesterday;
+      let newC = `Cases: ${this.newCases}`;
+      this.newCases = newC;
+
+      let todayD = data[0].Deaths;
+      let yesterdayD = data[1].Deaths;
+      this.newDea = todayD - yesterdayD;
+      let newD = `Deaths: ${this.newDea}`;
+      this.newDea = newD;
+
+      let yyyy = this.data.getFullYear();
+      let mm = this.setDois(this.data.getMonth() + 1);
+      let dd = this.setDois(this.data.getDate());
+      let full = `${yyyy}-${mm}-${dd}`;
+
+
+    this.service.getMonths(n, full)
+    .subscribe((res) => {
+
+      let lastIndex = res.length - 1;
+      let middleIndex = Math.floor(res.length / 2);
+
+      var ctx = document.getElementById('myChart');
+      this.charttt = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['January' ,'March', 'May'],
+            datasets: [{
+                label: 'cases',
+                data: [res[0].Cases, res[middleIndex].Cases, res[lastIndex].Cases],
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        }
+    });
+    })
+      
+    });
+  }

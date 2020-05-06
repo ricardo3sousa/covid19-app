@@ -1,0 +1,14 @@
+var ctx = document.getElementById('myChart');
+      this.charttt = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [diasNum[4] ,diasNum[3] ,diasNum[2], diasNum[1], diasNum[0]],
+            datasets: [{
+                label: 'cases',
+                data: [data[11].Active, data[12].Active, data[13].Active, data[14].Active, data[15].Active],
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        }
+    });

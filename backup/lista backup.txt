@@ -1,0 +1,16 @@
+getCountries(){
+    this.service.getCountries()
+    .subscribe((data) => {
+      data.map((item) => {
+        this.col.push(item.Country);
+      })
+      this.col.sort().map((item) => {
+        this.service.getCountry(item)
+        .subscribe((data) => {
+          if(data.length > 0){
+            this.list.push(item);
+          }
+        })
+      })
+    })
+  }

@@ -1,0 +1,28 @@
+api
+------------------
+https://api.covid19api.com/total/country/portugal/status/confirmed?from=2020-04-01T00:00:00Z&to=2020-04-28T00:00:00Z'
+
+
+
+graphic
+------------------
+
+this.service.getTeste()
+    .subscribe((res) => {
+
+      console.log(res);
+      var ctx = document.getElementById('myChart');
+      this.charttt = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Janeiro' ,'Fevereiro' ,'Março', 'Abril'],
+            datasets: [{
+                label: 'cases',
+                data: [res[24].Cases, res[48].Cases, res[72].Cases, res[98].Cases],
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        }
+    });
+    })
